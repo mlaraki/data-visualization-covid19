@@ -1,7 +1,7 @@
 <template>
   <div id="mobile" style="margin-top : 30%">
       <h3 >
-          This app is not optimized for mobile.
+          This webapp is not optimized for mobile.
           <br>
           <a href="https://www.apple.com/fr/mac/">Buy a mac 😆</a> 
       </h3>

@@ -7,7 +7,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-
 import Loader from "@/components/Loader.vue"
 export default {
   name: 'app',
@@ -16,7 +15,7 @@ export default {
   },
   computed: {
     ...mapGetters(['getLoadingStatus'])
-  }
+  },
 }
 </script>
 

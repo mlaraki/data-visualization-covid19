@@ -101,7 +101,6 @@ export default {
         );
         let processed = await res.json();
         this.$store.state.covidStats = processed;
-        console.log("data", processed);
       } catch (error) {
         console.log("error while fetching data", error.message);
       }
@@ -109,10 +108,7 @@ export default {
     async getCountryCode() {
       try {
         let res = await fetch("http://ip-api.com/json/", {
-          method: "GET",
-          headers: {
-            "Access-Control-Allow-Origin": "*"
-          }
+          method: "GET"
         });
         let toJson = await res.json();
         this.$store.dispatch(

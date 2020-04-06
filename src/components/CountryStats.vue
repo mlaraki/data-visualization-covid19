@@ -35,7 +35,6 @@ export default {
         let processed = await res.json();
         this.countryStats = processed.locations;
         this.$refs.tableCountry.$options._parentVnode.elm.classList.remove('el-table--enable-row-hover')
-        console.log("country stats", this.countryStats);
       } catch (error) {
         console.log("error while fetching data", error.message);
       }

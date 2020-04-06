@@ -68,7 +68,6 @@ export default {
         );
         let processed = await res.json();
         this.data = processed.locations;
-        console.log("this.data", this.data);
       } catch (error) {
         console.log("error while fetching data", error.message);
       }
