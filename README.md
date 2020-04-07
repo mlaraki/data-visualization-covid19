@@ -1,4 +1,11 @@
-# coronavirus-dataviz
+## https://covid19-dataviz.web.app/
+
+## Live datavisualization of the covid19 outbreak using :
+- [Deckgl](https://github.com/uber/deck.gl)
+- [Mapbox](https://github.com/mapbox)
+- [GCP](https://github.com/GoogleCloudPlatform) (for the backup API)
+- Hosting : Firebase
+- Front : Vuejs + Vuex
 
 ## Project setup
 ```
@@ -13,16 +20,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
 
 ### Customize configuration
