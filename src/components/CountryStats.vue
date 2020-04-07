@@ -1,6 +1,6 @@
 <template>
   <div id="countrystats">
-    <el-table v-if="countryStats" :data="countryStats" :default-sort = "{prop: 'latest.confirmed', order: 'descending'}" height="450" style="width: 100%" row-class-name="no-hover" >
+    <el-table v-if="getStatsByLocation" :data="getStatsByLocation" :default-sort = "{prop: 'latest.confirmed', order: 'descending'}" height="450" style="width: 100%" row-class-name="no-hover" >
       <el-table-column prop="country" label="Country" width="160"></el-table-column>
       <el-table-column sortable prop="latest.confirmed" label="Confirmed" width="130"></el-table-column>
       <el-table-column sortable prop="latest.deaths" label="Deaths" width="130"></el-table-column>
@@ -9,36 +9,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "CountryStats",
-  data() {
-    return {
-        countryStats: null
-    };
-  },
-  created() {
-    this.fetchData();
-  },
-  methods: {
-    async fetchData() {
-      try {
-        let res = await fetch(
-          "https://coronavirus-tracker-api.herokuapp.com/v2/locations",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*"
-            }
-          }
-        );
-        let processed = await res.json();
-        this.countryStats = processed.locations;
-        this.$refs.tableCountry.$options._parentVnode.elm.classList.remove('el-table--enable-row-hover')
-      } catch (error) {
-        console.log("error while fetching data", error.message);
-      }
-    }
+  computed: {
+    ...mapGetters(['getStatsByLocation'])
   }
 };
 </script>
