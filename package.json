@@ -1,6 +1,7 @@
 {
   "name": "coronavirus-dataviz",
   "version": "0.1.0",
+  "author": "mlaraki , https://github.com/mlaraki/",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
