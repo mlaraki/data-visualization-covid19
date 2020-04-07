@@ -28,7 +28,7 @@ export default {
     return {
       data: null,
       countryStats: null,
-      tooltipPosition: null
+      tooltipPosition: null,
     };
   },
   async created() {
@@ -70,6 +70,8 @@ export default {
         this.data = processed.locations;
       } catch (error) {
         console.log("error while fetching data", error.message);
+        //backup data
+        this.data = this.$store.state.statsByLocation;
       }
     },
     getLayer(type) {
@@ -160,14 +162,6 @@ export default {
               }, 500);
             }
           },
-          // onHover: ({ object, x, y }) => {
-          //   if (object) {
-          //     this.countryStats = object.points[0];
-          //     this.tooltipPosition = { x, y };
-          //   } else {
-          //     this.countryStats = null;
-          //   }
-          // },
           getColorWeight: el => el.latest.confirmed,
           lowerPercentile: 10
         });
@@ -180,7 +174,7 @@ export default {
         this.map.removeLayer(oldVal);
         this.map.addLayer(this.getLayer(newVal));
       }
-    }
+    },
   }
 };
 </script>

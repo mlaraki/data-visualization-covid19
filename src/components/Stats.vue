@@ -1,6 +1,6 @@
 <template>
   <div id="stats">
-    <el-row v-for="(stats, name, i) in globalStats" :key="name">
+    <el-row v-for="(stats, name, i) in getLatest" :key="name">
       <el-col :span="12">
         <div class="grid-content">
           <h3>
@@ -33,7 +33,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['globalStats'])
+    ...mapGetters(['getLatest'])
   },
 };
 </script>

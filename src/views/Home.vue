@@ -1,12 +1,8 @@
 <template>
   <div class="home">
-    <MapView :layerType="layerType"/>
+    <MapView :layerType="layerType" />
     <div id="dashboard" v-show="!getLoadingStatus">
-      <el-menu
-        class="dashboard-menu el-menu-vertical"
-        :collapse="true"
-        background-color="#313742"
-      >
+      <el-menu class="dashboard-menu el-menu-vertical" :collapse="true" background-color="#313742">
         <el-menu-item index="1" @click="displayStats = true">
           <img src="../assets/stats.svg" alt="open stats" width="30px" />
           <span slot="title">Stats</span>
@@ -24,11 +20,11 @@
         default-active="1"
       >
         <el-menu-item index="1" @click="layerType = 'HexagonLayer'">
-          <img src="../assets/hexagone.svg" alt="layer Hexagon" width="30px"/>
+          <img src="../assets/hexagone.svg" alt="layer Hexagon" width="30px" />
           <span slot="title"></span>
         </el-menu-item>
         <el-menu-item index="2" @click="layerType = 'HeatmapLayer'">
-          <img src="../assets/heatmap.svg" alt="layer heatmap" width="30px"/>
+          <img src="../assets/heatmap.svg" alt="layer heatmap" width="30px" />
           <span slot="title"></span>
         </el-menu-item>
         <el-menu-item index="3" @click="layerType = 'ScatterplotLayer'">
@@ -76,21 +72,22 @@ export default {
       displayNews: false,
       displayStats: false,
       activeName: "1",
-      layerType: "HexagonLayer"
+      layerType: "HexagonLayer",
+      url : process.env.VUE_APP_BACKUP_API_URL
     };
   },
   async created() {
     if (this.$store.state.countryCode == null) this.getCountryCode();
     this.fetchData();
   },
-    computed: {
-    ...mapGetters(['getLoadingStatus'])
+  computed: {
+    ...mapGetters(["getLoadingStatus"])
   },
   methods: {
     async fetchData() {
       try {
         let res = await fetch(
-          "https://coronavirus-tracker-api.herokuapp.com/all",
+          this.url,
           {
             method: "GET",
             headers: {
@@ -99,12 +96,14 @@ export default {
             }
           }
         );
-        let processed = await res.json();
-        this.$store.state.covidStats = processed;
+        let data = await res.json();
+        this.$store.dispatch("setLatest", JSON.parse(data.latest));
+        this.$store.dispatch("setStatsByLocation", JSON.parse(data.locations));
       } catch (error) {
         console.log("error while fetching data", error.message);
       }
     },
+
     async getCountryCode() {
       try {
         let res = await fetch("http://ip-api.com/json/", {

@@ -7,7 +7,9 @@ export default new Vuex.Store({
   state: {
     loading: true,
     countryCode: null,
-    covidStats: null
+    covidStats: null,
+    latest: null,
+    statsByLocation : null
   },
   mutations: {
     setLoading(state, status){
@@ -15,6 +17,12 @@ export default new Vuex.Store({
     },
     setCountryCode(state, countryCode) {
       state.countryCode = countryCode;
+    },
+    setLatest(state, latest) {
+      state.latest = latest;
+    },
+    setStatsByLocation(state, stats) {
+      state.statsByLocation = stats;
     }
   },
   actions: {
@@ -23,16 +31,19 @@ export default new Vuex.Store({
     },
     setCountryCode(ctx, countryCode) {
       ctx.commit("setCountryCode", countryCode);
-    }
+    },
+    setLatest(ctx, latest) {
+      ctx.commit("setLatest", latest);
+    },
+    setStatsByLocation(ctx, stats) {
+      ctx.commit("setStatsByLocation", stats);
+    },
+    
   },
   getters: {
-    getLoadingStatus: state => {
-        return state.loading;
-    },
-    globalStats: state => {
-      if(state.covidStats)
-        return state.covidStats.latest;
-    }
+    getLoadingStatus: state => state.loading,
+    getLatest: state => state.latest,
+    getStatsByLocation: state => state.statsByLocation
   },
   modules: {}
 });

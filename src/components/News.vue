@@ -109,7 +109,7 @@ export default {
         }
         this.applyScript();
       } catch (error) {
-        console.log("An error occured whil fetching news", error.message);
+        console.log("error occured whil fetching news", error.message);
       }
     },
     isAboutCoronavirus(article) {
@@ -130,10 +130,6 @@ export default {
       var bg = document.querySelector(".item-bg");
       var items = document.querySelectorAll(".news__item");
       var item = document.querySelector(".news__item");
-
-      function cLog(content) {
-        console.log(content);
-      }
 
       if ($(window).width() > 800) {
         $(document).on("mouseover", ".news__item", function(_event, _element) {
