@@ -6,7 +6,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     loading: true,
-    countryCode: null,
     covidStats: null,
     latest: null,
     statsByLocation : null
@@ -14,9 +13,6 @@ export default new Vuex.Store({
   mutations: {
     setLoading(state, status){
       state.loading = status;
-    },
-    setCountryCode(state, countryCode) {
-      state.countryCode = countryCode;
     },
     setLatest(state, latest) {
       state.latest = latest;
@@ -28,9 +24,6 @@ export default new Vuex.Store({
   actions: {
     setLoadingFalse(ctx) {
       ctx.commit("setLoading", false);
-    },
-    setCountryCode(ctx, countryCode) {
-      ctx.commit("setCountryCode", countryCode);
     },
     setLatest(ctx, latest) {
       ctx.commit("setLatest", latest);

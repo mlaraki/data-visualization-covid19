@@ -18,3 +18,10 @@ export default {
   },
 }
 </script>
+
+<style lang="css">
+	#app {
+		overflow: hidden;
+		height: 100vh;
+		}
+</style>

@@ -7,10 +7,6 @@
           <img src="../assets/stats.svg" alt="open stats" width="30px" />
           <span slot="title">Stats</span>
         </el-menu-item>
-        <el-menu-item index="2" @click="displayNews = true">
-          <img src="../assets/newspaper.svg" alt="open news" width="30px" />
-          <span slot="title">News</span>
-        </el-menu-item>
       </el-menu>
 
       <el-menu
@@ -45,16 +41,12 @@
           </el-collapse>
         </el-drawer>
       </div>
-      <div id="dashboard-news">
-        <News v-if="displayNews" @closeNews="displayNews = false" />
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import MapView from "@/components/MapView.vue";
-import News from "@/components/News.vue";
 import Stats from "@/components/Stats.vue";
 import CountryStats from "@/components/CountryStats.vue";
 import { mapGetters } from "vuex";
@@ -63,13 +55,11 @@ export default {
   name: "Home",
   components: {
     MapView,
-    News,
     Stats,
     CountryStats
   },
   data() {
     return {
-      displayNews: false,
       displayStats: false,
       activeName: "1",
       layerType: "HexagonLayer",
@@ -77,7 +67,6 @@ export default {
     };
   },
   async created() {
-    if (this.$store.state.countryCode == null) this.getCountryCode();
     this.fetchData();
   },
   computed: {
@@ -102,21 +91,6 @@ export default {
       } catch (error) {
         console.log("error while fetching data", error.message);
       }
-    },
-
-    async getCountryCode() {
-      try {
-        let res = await fetch("http://ip-api.com/json/", {
-          method: "GET"
-        });
-        let toJson = await res.json();
-        this.$store.dispatch(
-          "setCountryCode",
-          toJson.countryCode.toLowerCase()
-        );
-      } catch (error) {
-        console.log("error while getting location", error.message);
-      }
     }
   }
 };
@@ -124,7 +98,7 @@ export default {
 <style lang="css" scoped>
 .dashboard-menu {
   position: absolute;
-  top: 0px;
+  bottom: 61px;
   left: 0px;
 }
 .dashboard-layers {
@@ -142,6 +116,14 @@ export default {
 <style lang="css">
 :focus {
   outline: none !important;
+}
+
+.el-menu {
+	border: solid 1px #e6e6e652 !important;
+}
+
+.el-menu--collapse {
+	width: 68px !important;
 }
 
 #dashboard-stats > div > div > div {
